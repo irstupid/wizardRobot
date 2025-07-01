@@ -1,0 +1,9 @@
+ok so i guess i should document this so im doing that
+i coppied most of the config files from the 2025 post project, i dont know the information off the top of my head and if we already entered it whats the point of doing it twice, but i left 
+the wheel offsets at 0 so i could tune them myself. i had one little hickup where i forgot to coppy a json file and SwerveDrive was having a miscarriage, but thats just a whoopsies. so i 
+just made a very basic subsystem that holds the SwerveDrive and had a command called "test", wich constantly spat out the angles of whichever wheel i told it to. then i went one at a time 
+moving the wheels to the angle i wanted to be 0 and coppying the angle it thought it was at into the modules offset. worked great, no fancy shmancy advatage whatever needed. then drive was
+almost as simple as calling a function. i say almost because i had an issue where the P for the angles pid was set way to low, because kraken motors need super high Ps and people dont usually
+use them for angle motors, so the angle motors didnt move and confused me, but once again just a configuration whoopsies. then the directions it moved in were wrong because joystic space and
+robot space are very differnt. robot space is forward on +x, left on +y, and joystick space is forward on -y, left on -x. just use x for y and y for x, negate everything, and you should be 
+good. x = -y and y = -x; and yeah now i get to be confused by the lack of documentation on how to get yagsl to follow a path, yippie!
