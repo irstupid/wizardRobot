@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Drive;
 
 public class RobotContainer {
-  private final CommandXboxController driverXbox = new CommandXboxController(0);
+  private final CommandXboxController controller = new CommandXboxController(0);
   private final Drive drive = new Drive();
 
   public RobotContainer() {
@@ -22,13 +22,11 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    driverXbox.a().onTrue(drive.printFrontLeft());
-    driverXbox.b().onTrue(drive.printFrontRight());
-    driverXbox.x().onTrue(drive.printBackLeft());
-    driverXbox.y().onTrue(drive.printBackRight());
+    controller.a().onTrue(drive.visionPoint());
+    controller.a().onFalse(
+        drive.simpleDrive(() -> -controller.getLeftY(), () -> -controller.getLeftX(), () -> controller.getRightX()));
     drive.setDefaultCommand(
-        drive.simpleDrive(() -> -driverXbox.getLeftY(), () -> -driverXbox.getLeftX(), () -> driverXbox.getRightX()));
-    // drive.setDefaultCommand(drive.test());
+        drive.simpleDrive(() -> -controller.getLeftY(), () -> -controller.getLeftX(), () -> controller.getRightX()));
   }
 
   public Command getAutonomousCommand() {
