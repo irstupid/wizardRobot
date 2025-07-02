@@ -104,21 +104,4 @@ public class Drive extends SubsystemBase {
             drive.drive(new Translation2d(x, y), r, false, false);
         });
     }
-
-    public Command visionDistance() {
-        return run(() -> {
-            PhotonPipelineResult result = camera.getLatestResult();
-            double x = 0;
-            double y = 0;
-            double r = 0;
-            if (result.hasTargets()) {
-                PhotonTrackedTarget target = result.getBestTarget();
-                double distance = PhotonUtils.calculateDistanceToTargetMeters(0.381, 0.635, 0,
-                        Units.degreesToRadians(target.getPitch()));
-                System.out.println(distance);
-                // r = target.yaw / 6 * -maxSpeed;
-            }
-            drive.drive(new Translation2d(x, y), r, false, false);
-        });
-    }
 }
